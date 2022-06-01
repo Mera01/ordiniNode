@@ -52,9 +52,9 @@ router.put("/order", async (req, res) => {
 });
 router.post("/order", async (req, res) => {
     try {
-        const annuncio = new Order(req.body);
-        await annuncio.save();
-        res.send(annuncio);
+        const order = new Order(req.body);
+        await order.save();
+        res.send(order);
     } catch (err) {
         res.status(422).send({ error: err.message });
     }
