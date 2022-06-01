@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const Order = mongoose.model("Order");
 const router = express.Router();
-const URL = 'http:/localhost:5000/'
+
 
 
 var cors = require('cors')
@@ -23,10 +23,10 @@ router.get("/orders", async (req, res) => {
         res.status(422).send({ error: err.message });
     }
 });
-router.get("/orders", async (req, res) => {
+router.get("/order", async (req, res) => {
     const { id } = req.body;
     try {
-        const responce = await Orders.find({ _id: id });
+        const responce = await Order.find({ _id: id });
         res.send(responce);
     } catch (err) {
         res.status(422).send({ error: err.message });
@@ -42,6 +42,7 @@ router.delete("/order", async (req, res) => {
     }
 });
 router.put("/order", async (req, res) => {
+    const { id } = req.body;
     try {
         const responce = await Order.findByIdAndUpdate(id, req.body);
         res.send(responce);
@@ -49,7 +50,7 @@ router.put("/order", async (req, res) => {
         res.status(422).send({ error: err.message });
     }
 });
-router.post("/orders", async (req, res) => {
+router.post("/order", async (req, res) => {
     try {
         const annuncio = new Order(req.body);
         await annuncio.save();
@@ -58,4 +59,5 @@ router.post("/orders", async (req, res) => {
         res.status(422).send({ error: err.message });
     }
 });
+
 module.exports = router;

@@ -4,6 +4,7 @@ require("./src/models/Order");
 const mongoose = require("mongoose");
 mongoose.connect('mongodb://localhost:27017/orderProject');
 const orderRoutes = require("./src/routes/order");
+app.use(express.json());
 app.use(orderRoutes);
 
 const cors = require('cors');
@@ -22,3 +23,4 @@ app.get("/test", (req, res) => {
 app.listen( process.env.PORT ||  3000, () => {
   console.log("Listening on port 3000");
 });
+

@@ -13,11 +13,11 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     cliente: {
-        type: {},
+        type: Object,
         required: true
     },
     listProdotti: {
-        type: [],
+        type: Array,
         required: true
     },
 }, { timestamps: true });
