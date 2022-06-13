@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const userSchema = new mongoose.Schema({
+const orderSchema = new mongoose.Schema({
     numero: {
         type: String,
         required: true
@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
 }, { timestamps: true });
-mongoose.model('Order', userSchema);
+mongoose.model('Order', orderSchema);
 
 
 
