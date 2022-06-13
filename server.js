@@ -7,6 +7,8 @@ const orderRoutes = require("./src/routes/order");
 app.use(express.json());
 app.use(orderRoutes);
 
+const port = 3000
+
 const cors = require('cors');
 app.use(cors({
   origin: true,
@@ -20,7 +22,11 @@ app.get("/test", (req, res) => {
 });
 
 
-app.listen( process.env.PORT ||  3000, () => {
-  console.log("Listening on port 3000");
-});
+
+app.listen(port, () => {
+  console.log('Server listen on port ' + port)
+})
+
+
+
 

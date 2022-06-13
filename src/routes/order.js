@@ -8,14 +8,16 @@ const router = express.Router();
 
 var cors = require('cors')
 
+
 router.use(cors({
     origin: true,
     credentials: true,
     methods: 'POST,GET,PUT,OPTIONS,DELETE'
 }));
 
+const security = require('../util/security')
 
-router.get("/orders", async (req, res) => {
+router.get("/orders",security.verifyToken, async (req, res) => {
     try {
         const response = await Order.find();
         res.send(response);
@@ -23,7 +25,7 @@ router.get("/orders", async (req, res) => {
         res.status(422).send({ error: err.message });
     }
 });
-router.get("/order", async (req, res) => {
+router.get("/order",security.verifyToken, async (req, res) => {
     const { id } = req.body;
     try {
         const responce = await Order.find({ _id: id });
@@ -32,7 +34,7 @@ router.get("/order", async (req, res) => {
         res.status(422).send({ error: err.message });
     }
 });
-router.delete("/order", async (req, res) => {
+router.delete("/order", security.verifyToken , async (req, res) => {
     const { id } = req.body;
     try {
         const responce = await Order.findByIdAndDelete({ _id: id });
@@ -41,7 +43,7 @@ router.delete("/order", async (req, res) => {
         res.status(422).send({ error: err.message });
     }
 });
-router.put("/order", async (req, res) => {
+router.put("/order",security.verifyToken , async (req, res) => {
     const { id } = req.body;
     try {
         const responce = await Order.findByIdAndUpdate(id, req.body);
@@ -50,7 +52,7 @@ router.put("/order", async (req, res) => {
         res.status(422).send({ error: err.message });
     }
 });
-router.post("/order", async (req, res) => {
+router.post("/order", security.verifyToken , async (req, res) => {
     try {
         const annuncio = new Order(req.body);
         await annuncio.save();
