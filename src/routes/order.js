@@ -25,8 +25,8 @@ router.get("/orders",security.verifyToken, async (req, res) => {
         res.status(422).send({ error: err.message });
     }
 });
-router.get("/order",security.verifyToken, async (req, res) => {
-    const { id } = req.body;
+router.get("/order/{id}",security.verifyToken, async (req, res) => {
+    const  id  = req.query.id;
     try {
         const responce = await Order.find({ _id: id });
         res.send(responce);
